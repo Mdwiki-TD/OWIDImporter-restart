@@ -21,4 +21,4 @@ jobs:
           script_stop: true
           key: ${{ secrets.KEY }}                # private SSH key stored in GitHub Secrets
           script: |
-            become TOOLNAME bash -lc "toolforge webservice buildservice restart"
+            become owidimporter bash -lc "toolforge webservice buildservice restart"
