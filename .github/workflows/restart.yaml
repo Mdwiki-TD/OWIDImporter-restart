@@ -1,0 +1,24 @@
+name: Restart Toolforge Webservice
+
+on:
+  # manual trigger
+  workflow_dispatch:
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restart Toolforge service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}             
+          username: ${{ secrets.USERNAME }}      
+          port: 22
+          request_pty: true
+          script_stop: true
+          key: ${{ secrets.KEY }}                # private SSH key stored in GitHub Secrets
+          script: |
+            become TOOLNAME bash -lc "toolforge webservice buildservice restart"
